@@ -1,0 +1,63 @@
+version: '3.7'
+
+services: 
+  postgres:
+    image: juliuskrah/postgres:12-alpine-cdc
+    container_name: cdc-postgres
+    environment: 
+    - POSTGRES_PASSWORD=postgrespwd
+  keycloak:
+    image: jboss/keycloak:8.0.1
+    container_name: cdc-keycloak
+    depends_on: 
+      - postgres
+    environment: 
+      - KEYCLOAK_USER=test
+      - KEYCLOAK_PASSWORD=test    
+      - DB_ADDR=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=sample
+      - DB_SCHEMA=sample
+      - DB_USER=sample
+      - DB_PASSWORD=sample
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.3.2
+    container_name: cdc-zookeeper
+    environment: 
+    - ZOOKEEPER_CLIENT_PORT=2181
+    - ZOOKEEPER_TICK_TIME=2000
+    - ZOOKEEPER_SYNC_LIMIT=2
+    volumes: 
+    - zk-data:/var/lib/zookeeper/data
+    - zk-trx-logs:/var/lib/zookeeper/log
+  kafka:
+    image: confluentinc/cp-kafka:5.3.2
+    container_name: kafka-kraken
+    depends_on: 
+    - zookeeper
+    environment:
+    - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+    - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+    - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+    - KAFKA_BROKER_ID=1
+    - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+    volumes: 
+    - kafka-data:/var/lib/kafka/data
+  connect:
+    image: debezium/connect:1.0.0.Final
+    container_name: cdc-connect
+    depends_on: 
+    - kafka
+    - postgres
+    environment:
+    - BOOTSTRAP_SERVERS=kafka:29092
+    - GROUP_ID=1
+    - CONFIG_STORAGE_TOPIC=cdc_connect_configs
+    - OFFSET_STORAGE_TOPIC=cdc_connect_offsets
+    - STATUS_STORAGE_TOPIC=cdc_connect_statuses
+
+volumes: 
+  pgdata:
+  zk-data:
+  zk-trx-logs:
+  kafka-data:
