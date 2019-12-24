@@ -71,24 +71,6 @@ services:
     - CONFIG_STORAGE_TOPIC=cdc_connect_configs
     - OFFSET_STORAGE_TOPIC=cdc_connect_offsets
     - STATUS_STORAGE_TOPIC=cdc_connect_statuses
-    - CONNECT_HOST=connect
-    command: 
-    - bash
-    - -c
-    - |
-      start & 
-      echo "Waiting for Kafka Connect to start listening on $$CONNECT_HOST ⏳"
-      while : ; do
-        curl_status=$$(curl -s -o /dev/null -w %{http_code} http://$$CONNECT_HOST:8083/connectors)
-        echo -e $$(date) " Kafka Connect listener HTTP state: " $$curl_status " (waiting for 200)"
-        if [ $$curl_status -eq 200 ] ; then
-          break
-        fi
-        sleep 5 
-      done
-      echo -e "\n--\n+> Creating Kafka Connector(s)"
-      /scripts/create-dbz-source.sh
-      sleep infinity
     volumes: 
     - ./connect:/scripts
     ports:

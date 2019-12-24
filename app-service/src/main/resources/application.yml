@@ -1,0 +1,13 @@
+---
+micronaut:
+  application:
+    name: app-service
+
+---
+kafka:
+  bootstrap:
+    servers: localhost:9092
+
+micronaut:
+  server:
+    port: 8082

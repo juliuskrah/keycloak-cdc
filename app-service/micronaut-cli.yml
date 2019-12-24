@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: com.juliuskrah.cdc
+---
+testFramework: junit
+sourceLanguage: java
