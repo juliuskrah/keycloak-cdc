@@ -2,11 +2,17 @@ package com.juliuskrah.cdc.dto;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * User Role Mapping representation from Keycloak
+ * 
+ * @author Julius Krah
  */
 public class UserRoleDto {
+    @JsonProperty("user_id")
     private UUID userId;
+    @JsonProperty("role_id")
     private UUID roleId;
 
     public UUID getUserId() {

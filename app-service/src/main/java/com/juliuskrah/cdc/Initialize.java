@@ -21,6 +21,8 @@ import io.reactiverse.reactivex.pgclient.PgPool;
 
 /**
  * Initializes the database
+ * 
+ * @author Julius Krah
  */
 @Singleton
 public class Initialize {
@@ -31,6 +33,9 @@ public class Initialize {
         this.client = client;
     }
 
+    /**
+     * Creates the database tables on application start
+     */
     @EventListener
     public void onStartUp(StartupEvent event) {
         log.info("Initializing the database");

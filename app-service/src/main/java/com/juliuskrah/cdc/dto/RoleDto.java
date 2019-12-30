@@ -4,6 +4,8 @@ import java.util.UUID;
 
 /**
  * Representation of Role from Keycloak
+ * 
+ * @author Julius Krah
  */
 public class RoleDto {
     private UUID id;

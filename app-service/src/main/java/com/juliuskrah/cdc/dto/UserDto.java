@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Representation of the User entity from Keycloak
+ * 
+ * @author Julius Krah
  */
 public class UserDto {
     private UUID id;

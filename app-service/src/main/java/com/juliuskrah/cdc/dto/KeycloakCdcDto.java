@@ -6,7 +6,10 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * DTO for events emitted from Kafka
+ * DTO for events emitted from Kafka. The Json payload emitted by Debezium is a bit unwindy. 
+ * This class attempts to simplify the structure for use
+ * 
+ * @author Julius Krah
  */
 public class KeycloakCdcDto<T> {
     private Map<String, Object> schema;
