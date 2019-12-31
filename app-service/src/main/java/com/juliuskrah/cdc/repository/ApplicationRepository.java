@@ -108,7 +108,34 @@ public class ApplicationRepository {
     }
 
     public Flowable<UserDto> findUsers(){
-        return null;
+        // Query courtesy - https://dba.stackexchange.com/questions/173831/convert-right-side-of-join-of-many-to-many-into-array
+        return this.client.rxBegin()
+           .flatMapPublisher(tx -> tx.rxPrepare("SELECT id, username, email, first_name, last_name, enabled, created_timestamp, r.roles "
+              + "FROM users u, "
+              + "LATERAL( "
+              + "SELECT ARRAY( "
+              + "SELECT r.name FROM user_role ur "
+              + "JOIN roles r ON r.id = ur.role_id "
+              + "WHERE ur.user_id = u.id "
+              + ") AS roles "
+              + ") r" )
+              .flatMapPublisher(preparedQuery -> {
+                var stream = preparedQuery.createStream(50, Tuple.tuple());
+                return stream.toFlowable();
+              })
+            .doAfterTerminate(tx::commit))
+            .map(row -> {
+                var user = new UserDto();
+                user.setId(row.getUUID("id"));
+                user.setEnabled(row.getBoolean("enabled"));
+                user.setUsername(row.getString("username"));
+                user.setEmail(row.getString("email"));
+                user.setFirstName(row.getString("first_name"));
+                user.setLastName(row.getString("last_name"));
+                user.setCreatedTimestamp(row.getOffsetDateTime("created_timestamp").toInstant());
+                user.setRoles(row.getStringArray("roles"));
+                return user;
+            });
     }
     
 }

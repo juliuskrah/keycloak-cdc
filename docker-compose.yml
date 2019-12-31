@@ -10,6 +10,8 @@ services:
     environment: 
     - POSTGRES_USER=julius
     - POSTGRES_PASSWORD=julius123
+    volumes: 
+    - pgdata:/var/lib/postgresql/data
     ports:
     - '5432:5432'
   keycloak:
@@ -71,8 +73,8 @@ services:
     - CONFIG_STORAGE_TOPIC=cdc_connect_configs
     - OFFSET_STORAGE_TOPIC=cdc_connect_offsets
     - STATUS_STORAGE_TOPIC=cdc_connect_statuses
-    volumes: 
-    - ./connect:/scripts
+    # volumes: 
+    # - ./connect:/scripts
     ports:
     - '8083:8083'
 

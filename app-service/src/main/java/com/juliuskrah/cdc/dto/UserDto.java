@@ -1,6 +1,7 @@
 package com.juliuskrah.cdc.dto;
 
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,6 +24,7 @@ public class UserDto {
     private Instant createdTimestamp;
     @JsonProperty("realm_id")
     private String realm;
+    private String[] roles;
 
     public UUID getId() {
         return id;
@@ -55,7 +57,7 @@ public class UserDto {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    
+
     public String getLastName() {
         return lastName;
     }
@@ -88,10 +90,18 @@ public class UserDto {
         this.realm = realm;
     }
 
+    public String[] getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String[] roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "UserDto [createdTimestamp=" + createdTimestamp + ", email=" + email + ", enabled=" + enabled
-                + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName + ", realm=" + realm
-                + ", username=" + username + "]";
+                + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName + ", realm=" + realm + ", roles="
+                + Arrays.toString(roles) + ", username=" + username + "]";
     }
 }
