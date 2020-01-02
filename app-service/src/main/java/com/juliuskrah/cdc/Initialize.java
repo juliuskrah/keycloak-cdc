@@ -1,11 +1,6 @@
 package com.juliuskrah.cdc;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Optional;
 
 import javax.inject.Singleton;
 
@@ -40,10 +35,10 @@ public class Initialize {
     public void onStartUp(StartupEvent event) {
         log.info("Initializing the database");
         ResourceLoader loader = new ResourceResolver().getLoader(ClassPathResourceLoader.class).get();
-        Optional<URL> url = loader.getResource("classpath:schema.sql");
-        if (url.isPresent()) {
-            try {
-                var sql = new String(Files.readAllBytes(Paths.get(url.get().toURI())));
+        var resourceStream = loader.getResourceAsStream("classpath:schema.sql");
+        if (resourceStream.isPresent()) {
+            try(var stream = resourceStream.get()) {
+                var sql = new String(stream.readAllBytes());
                 log.debug("SQL: {}", sql);
                 client.query(sql, ar -> {
                     if(ar.succeeded()) {
@@ -53,9 +48,9 @@ public class Initialize {
                         log.error("Could not execute statement", ar.cause());
                     }
                 });
-            } catch (IOException | URISyntaxException e) {
-               log.error("unable to read file", e);
+            } catch (IOException e) {
+                log.error("unable to read file", e);
             }
-        }    
+        }
     }
 }
