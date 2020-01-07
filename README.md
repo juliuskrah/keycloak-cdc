@@ -1,3 +1,5 @@
+![Architecture](./cdc_app.svg)
+
 # Quickly for the impatient
 
 Clone this repository and navigate into the project directory and run the following commands:
