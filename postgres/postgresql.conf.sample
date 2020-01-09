@@ -1,0 +1,9 @@
+listen_addresses = '*'
+
+shared_preload_libraries = 'decoderbufs,wal2json'
+
+wal_level = logical             
+max_wal_senders = 4             
+#wal_keep_segments = 4          
+#wal_sender_timeout = 60s       
+max_replication_slots = 4       
