@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Keycloak CDC - Application</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/vendor/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/vendor/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/vendor/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/vendor/main.css}">    
+    <link rel="stylesheet" th:href="@{/css/vendor/responsive.css}">
+    <link rel="stylesheet" th:href="@{/fonts/fontawesome-free-5.5.0/css/all.min.css}">
+
+  </head>
+  
+  <body>
+
+    <!-- Header Section Start -->
+    <header id="home" class="hero-area-2">    
+      <div class="overlay"></div>
+      <nav class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar">
+        <div class="container">
+          <a th:href="@{/}" class="navbar-brand"><h3><i class="fas fa-home"></i></h3></a>  
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="lni-menu"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto w-100 justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="#home">Home</a>
+              </li>                           
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="#user">Users</a>
+              </li> 
+            </ul>
+          </div>
+        </div>
+      </nav>  
+      <div class="container">      
+        <div class="row space-100">
+          <div class="col-lg-12 col-md-12 col-xs-12">
+            <div class="contents">
+              <h2 class="head-title">CHANGE DATA CAPTURE
+              <p>Streaming Users & Roles created in Keycloak</p>
+            </div>
+          </div>
+        </div> 
+      </div>             
+    </header>
+    <!-- Header Section End --> 
+
+
+    <!-- Testimonial Section Start -->
+    <section id="user" class="section">
+      <div class="container">
+        <div class="section-header">   
+          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">USERS - <span id="count-of-users">0</span></p>    
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12" id="users"> 
+                     
+              <!-- USERS LIST GOES HERE -->           
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Testimonial Section End -->  
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="fas fa-chevron-up"></i>
+    </a> 
+
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="loader" id="loader-1"></div>
+    </div>
+    <!-- End Preloader -->
+
+	<script type="text/javascript">
+		//GET PAGE CONTEXT PATH
+	    const CONTEXT = [[@{/}]];
+		
+		//GET URL FOR STREAMING KAFKA CHANGES
+		const STREAM_EVENTS_URL = `[[${EVENTS_URL}]]`;
+	</script>
+	
+    <script th:src="@{/js/vendor/jquery-min.js}"></script>
+    <script th:src="@{/js/vendor/popper.min.js}"></script>
+    <script th:src="@{/js/vendor/bootstrap.min.js}"></script>          
+    <script th:src="@{/js/vendor/notify.min.js}"></script>
+    <script th:src="@{/js/vendor/wow.js}"></script>     
+    <script th:src="@{/js/vendor/moment.min.js}"></script>    
+    <script th:src="@{/js/vendor/moment.timezone.js}"></script>     
+    <script th:src="@{/js/vendor/jquery.magnific-popup.min.js}"></script>       
+    <script th:src="@{/js/vendor/main.js}"></script>
+    <script th:src="@{/js/custom/index.js}" type="module"></script>
+    
+  </body>
+</html>
