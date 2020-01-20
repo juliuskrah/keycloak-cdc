@@ -24,7 +24,7 @@
       <div class="overlay"></div>
       <nav class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar">
         <div class="container">
-          <a th:href="@{/}" class="navbar-brand"><img th:src="@{/img/logo.png}" alt=""></a>  
+          <a th:href="@{/}" class="navbar-brand"><h3>K-CDC</h3></a>  
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="lni-menu"></i>
           </button>
@@ -58,29 +58,12 @@
     <section id="user" class="section">
       <div class="container">
         <div class="section-header">   
-          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">USERS - 1</p>    
+          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">USERS - <span id="count-of-users"></span></p>    
         </div>
         <div class="row justify-content-center">
-          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12"> 
+          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12" id="users"> 
                      
-            <div class="user-card">
-              <div class="user-card--left">
-                <div class="img-thumb">
-                  <img th:src="@{/img/user.jpg}" alt="">
-                </div>
-              </div>
-              <div class="user-card--right">
-                <div class="user-card--right-info-main">
-                  <h3>Louis Gamor</h3>
-                  <span class="email">lkgamor@gmail.com</span>
-                  <span class="role">Admin</span>
-                </div>
-                <p class="user-card--right-info-extra">
-                	<span class="date-created">1st January, 2020</span>
-                </p>
-              </div>
-            </div>
-            
+              <!-- USERS LIST GOES HERE -->           
             
           </div>
         </div>
@@ -99,13 +82,19 @@
     </div>
     <!-- End Preloader -->
 
-    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+	<script type="text/javascript">
+		//GET PAGE CONTEXT PATH
+	    const CONTEXT = [[@{/}]];
+	</script>
+	
     <script th:src="@{/js/vendor/jquery-min.js}"></script>
     <script th:src="@{/js/vendor/popper.min.js}"></script>
     <script th:src="@{/js/vendor/bootstrap.min.js}"></script>          
+    <script th:src="@{/js/vendor/notify.min.js}"></script>
     <script th:src="@{/js/vendor/wow.js}"></script>     
     <script th:src="@{/js/vendor/jquery.magnific-popup.min.js}"></script>       
     <script th:src="@{/js/vendor/main.js}"></script>
+    <script th:src="@{/js/custom/index.js}"></script>
     
   </body>
 </html>

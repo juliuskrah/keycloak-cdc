@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @Service
 @EnableScheduling
-public class SsePushNotificationService {
+public class AppService {
 
 	final DateFormat DATE_FORMATTER = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
 	final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();

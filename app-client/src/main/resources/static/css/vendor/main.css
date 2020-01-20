@@ -490,6 +490,14 @@ button:focus {
   outline: none;
 }
 
+a.navbar-brand:hover, a.navbar-brand:focus {
+    color: #fff;
+}
+
+.navbar-brand h3 {
+	font-weight: bold;	
+}
+
 /* ==========================================================================
    Hero Area
    ========================================================================== */
