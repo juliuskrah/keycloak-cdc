@@ -39,7 +39,7 @@
 			</div>
 			</user-card> `;
 		USER_CONTAINER.insertAdjacentHTML('afterbegin', userCard);
-		$('#count-of-users').text(`${count++}`);
+		$('#count-of-users').text(`${++count}`);
 	};
 
 	EVENT_SOURCE.onopen = e => console.log('open');
