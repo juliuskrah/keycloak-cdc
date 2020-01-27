@@ -34,3 +34,5 @@ micronaut:
       restart: true
   server:
     port: 8082
+    cors:
+      enabled: true

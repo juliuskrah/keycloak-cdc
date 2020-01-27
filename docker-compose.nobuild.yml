@@ -4,9 +4,12 @@ services:
   app:
     image: juliuskrah/cdcapp:1.0
     container_name: cdc-app
+    depends_on: 
+    - postgres
     environment: 
     - POSTGRES_REACTIVE_CLIENT_HOST=postgres
     - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
+    - MICRONAUT_SERVER_CORS_ENABLED='true'
     ports:
     - '8082:8082'
   postgres:
