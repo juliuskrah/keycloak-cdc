@@ -14,6 +14,7 @@
     <link rel="stylesheet" th:href="@{/css/vendor/magnific-popup.css}">
     <link rel="stylesheet" th:href="@{/css/vendor/main.css}">    
     <link rel="stylesheet" th:href="@{/css/vendor/responsive.css}">
+    <link rel="stylesheet" th:href="@{/fonts/fontawesome-free-5.5.0/css/all.min.css}">
 
   </head>
   
@@ -24,7 +25,7 @@
       <div class="overlay"></div>
       <nav class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar">
         <div class="container">
-          <a th:href="@{/}" class="navbar-brand"><h3>K-CDC</h3></a>  
+          <a th:href="@{/}" class="navbar-brand"><h3><i class="fas fa-home"></i></h3></a>  
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="lni-menu"></i>
           </button>
@@ -73,7 +74,7 @@
 
     <!-- Go To Top Link -->
     <a href="#" class="back-to-top">
-      <i class="lni-chevron-up"></i>
+      <i class="fas fa-chevron-up"></i>
     </a> 
 
     <!-- Preloader -->
@@ -85,6 +86,9 @@
 	<script type="text/javascript">
 		//GET PAGE CONTEXT PATH
 	    const CONTEXT = [[@{/}]];
+		
+		//GET URL FOR STREAMING KAFKA CHANGES
+		const STREAM_EVENTS_URL = `[[${EVENTS_URL}]]`;
 	</script>
 	
     <script th:src="@{/js/vendor/jquery-min.js}"></script>
@@ -92,9 +96,11 @@
     <script th:src="@{/js/vendor/bootstrap.min.js}"></script>          
     <script th:src="@{/js/vendor/notify.min.js}"></script>
     <script th:src="@{/js/vendor/wow.js}"></script>     
+    <script th:src="@{/js/vendor/moment.min.js}"></script>    
+    <script th:src="@{/js/vendor/moment.timezone.js}"></script>     
     <script th:src="@{/js/vendor/jquery.magnific-popup.min.js}"></script>       
     <script th:src="@{/js/vendor/main.js}"></script>
-    <script th:src="@{/js/custom/index.js}"></script>
+    <script th:src="@{/js/custom/index.js}" type="module"></script>
     
   </body>
 </html>

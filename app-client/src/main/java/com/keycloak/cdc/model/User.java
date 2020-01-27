@@ -1,5 +1,7 @@
 package com.keycloak.cdc.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import lombok.Data;
@@ -15,6 +17,6 @@ public class User {
 	
 	private String email;
 	
-	private String role;
+	private List<Role> role = new ArrayList<Role>();
 	
 }

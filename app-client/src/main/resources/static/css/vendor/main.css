@@ -625,7 +625,7 @@ a.navbar-brand:hover, a.navbar-brand:focus {
   padding-bottom: 80px !important;
 }
 
-.user-card {
+user-card {
   padding: 30px;
   margin: 15px;
   background: #fff;
@@ -635,32 +635,31 @@ a.navbar-brand:hover, a.navbar-brand:focus {
   grid-template: auto / 100px auto;
 }
 
-.user-card .user-card--left .img-thumb img {
-  border-radius: 50%;
-  width: 65%;
+user-card .user-card--left .img-thumb i {
+  font-size: 3.5rem;
 }
 
-.user-card .user-card--right {
+user-card .user-card--right {
   overflow: hidden;
 }
 
-.user-card .user-card--right span {
+user-card .user-card--right span {
   color: #a0a6ad;
 }
 
-.user-card .user-card--right .user-card--right-info-main {
+user-card .user-card--right .user-card--right-info-main {
   width: 100%;
   margin-bottom: 10px;
   position: relative;
 }
 
-.user-card .user-card--right .user-card--right-info-main h3 {
+user-card .user-card--right .user-card--right-info-main h3 {
   color: #3c9cfd;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
 }
 
-.user-card .user-card--right .user-card--right-info-main .role {
+user-card .user-card--right .user-card--right-info-main .role {
   position: absolute;
   right: 0;
   top: 0;
@@ -671,7 +670,7 @@ a.navbar-brand:hover, a.navbar-brand:focus {
   font-variant: all-small-caps;
 }
 
-.user-card .user-card--right .user-card--right-info-extra {
+user-card .user-card--right .user-card--right-info-extra {
   font-size: 18px;
   font-weight: 500;
   line-height: 30px;
@@ -680,7 +679,7 @@ a.navbar-brand:hover, a.navbar-brand:focus {
   padding: 3px 0;
 }
 
-.user-card .user-card--right .user-card--right-info-extra .date-created {
+user-card .user-card--right .user-card--right-info-extra .date-created {
   float: right;
   font-size: .95rem;
   font-style: italic;

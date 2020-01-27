@@ -7,9 +7,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.core.TypeReferences.PagedModelType;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,34 +14,35 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import com.keycloak.cdc.model.User;
 import com.keycloak.cdc.service.AppService;
 
 @RestController
 public class AppRestController {
 
-	@Value("${debezium.url}")
-	String DEBEZIUM_URL;
+	@Value("${users.url}")
+	String GET_USERS_URL;
 	
 	@Autowired
 	AppService service;
 	
 	@Autowired
 	private RestTemplate restTemplate;
-	
-	private String USER_LIST_URL = "http://127.0.0.1:8082/api/users";
 
 	final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 
 	@GetMapping("/users")
-	public CollectionModel<EntityModel<User>> getUsers() {
+	public ResponseEntity<String> getUsers() {
 		
-		return restTemplate.exchange(USER_LIST_URL, HttpMethod.GET, null, new PagedModelType<EntityModel<User>>() {}).getBody(); 
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+		ResponseEntity<String> users = restTemplate.exchange(GET_USERS_URL, HttpMethod.GET, entity, String.class);
+		System.out.println(users.getBody());
+		return users;
 	}
 	
 	@GetMapping("/notification")
