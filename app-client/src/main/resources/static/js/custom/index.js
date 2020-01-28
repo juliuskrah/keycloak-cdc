@@ -27,12 +27,15 @@ import {DOMStrings, DOMEndpoints, DOMIds} from './data.js';
 			if (users.length > 0) {
 				
 				users.forEach((user)=> {
-					let id = user.id,
+					
+					let role, id = user.id,
 						email = user.email || DOMStrings.notAvailable,
-						role = user.roles[0] || DOMStrings.notAvailable,
 						lastName = user.last_name || DOMStrings.notAvailable,
 						firstName = user.first_name || DOMStrings.notAvailable,
 						timeCreated = user.created_timestamp || DOMStrings.notAvailable;
+					
+					if (user.roles) role = user.roles[0] || DOMStrings.notAvailable;
+					else role = DOMStrings.notAvailable;
 					
 					let userCard = `<user-card id="${id}">
 						<div class="user-card--left">
