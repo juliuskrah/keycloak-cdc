@@ -20,6 +20,9 @@ services:
     - '8000:8081'
     depends_on:
     - app-service
+    environment:
+    - USERS_URL=http://localhost:8082/api/users
+    - EVENTS_STREAMING_URL=http://localhost:8082/api/users/stream
   postgres:
     image: juliuskrah/postgres:12-alpine-cdc
     container_name: cdc-postgres
