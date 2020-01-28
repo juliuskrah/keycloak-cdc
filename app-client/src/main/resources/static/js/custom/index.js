@@ -62,11 +62,16 @@ import {DOMStrings, DOMEndpoints, DOMIds} from './data.js';
 			else {
 				$.notify(DOMStrings.usersNotFound, DOMStrings.notifyInfo);
 				$(DOMIds.totalUsers).text(0);
+				
+				let noUserCard = `<div class="d-flex justify-content-center mt-3"><i class="fas fa-user-slash text-dark fa-5x"></i></div>`;
+				USER_CONTAINER.insertAdjacentHTML(DOMStrings.afterBeginOfContainer, noUserCard);
 			}
 		},
 		error:()=> {
 			$.notify(DOMStrings.errorLoadingUsers, DOMStrings.notifyError);
 			$(DOMIds.totalUsers).text(0);
+			let noUserCard = `<div class="d-flex justify-content-center mt-3"><i class="fas fa-user-slash text-dark fa-5x"></i></div>`;
+			USER_CONTAINER.insertAdjacentHTML(DOMStrings.afterBeginOfContainer, noUserCard);
 		}		
 	});	 
 	
