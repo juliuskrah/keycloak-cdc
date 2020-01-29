@@ -21,11 +21,12 @@ import {DOMStrings, DOMEndpoints, DOMIds} from './data.js';
 	
 	//AJAX REQUEST TO GET & DISPLAY LIST OF AVAIALABE USERS IN DATABASE
 	$.ajax({
-		url: CONTEXT + `users`,
+		url: `users`,
 		success:(users)=> {
 
 			if (users.length > 0) {
 				
+				$('#no-users-card').remove();
 				users.forEach((user)=> {
 					
 					let role, id = user.id,
@@ -60,18 +61,24 @@ import {DOMStrings, DOMEndpoints, DOMIds} from './data.js';
 				$.notify(DOMStrings.usersFound, DOMStrings.notifySuccess);
 			}
 			else {
-				$.notify(DOMStrings.usersNotFound, DOMStrings.notifyInfo);
 				$(DOMIds.totalUsers).text(0);
 				
-				let noUserCard = `<div class="d-flex justify-content-center mt-3"><i class="fas fa-user-slash text-dark fa-5x"></i></div>`;
+				let noUserCard = `<no-user-card id="no-users-card">
+				<div><i class="fas fa-user-slash"></i></div>
+				<div><p>No Users</p></div>
+				</no-user-card>`;
 				USER_CONTAINER.insertAdjacentHTML(DOMStrings.afterBeginOfContainer, noUserCard);
+				$.notify(DOMStrings.usersNotFound, DOMStrings.notifyInfo);
 			}
 		},
 		error:()=> {
-			$.notify(DOMStrings.errorLoadingUsers, DOMStrings.notifyError);
 			$(DOMIds.totalUsers).text(0);
-			let noUserCard = `<div class="d-flex justify-content-center mt-3"><i class="fas fa-user-slash text-dark fa-5x"></i></div>`;
+			let noUserCard = `<no-user-card id="no-users-card">
+			<div><i class="fas fa-user-slash"></i></div>
+			<div><p>Error Loading Users.<br><br> Verify that the URL is valid</p></div>
+			</no-user-card>`;
 			USER_CONTAINER.insertAdjacentHTML(DOMStrings.afterBeginOfContainer, noUserCard);
+			$.notify(DOMStrings.errorLoadingUsers, DOMStrings.notifyError);
 		}		
 	});	 
 	
@@ -80,25 +87,6 @@ import {DOMStrings, DOMEndpoints, DOMIds} from './data.js';
 		const msg = e.data;
 		let date = moment(new Date()); 
 		console.log('MESSAGE -> ', msg)
-//		let userCard = `<user-card>
-//			<div class="user-card--left">
-//			<div class="img-thumb">
-//			<i class="fas fa-user-circle"></i>
-//			</div>
-//			</div>
-//			<div class="user-card--right">
-//			<div class="user-card--right-info-main">
-//			<h3>John Doe</h3>
-//			<span class="email">xxx@gmail.com</span>
-//			<span class="role">xxx</span>
-//			</div>
-//			<p class="user-card--right-info-extra">
-//			<span class="date-created">${date}</span>
-//			</p>
-//			</div>
-//			</user-card> `;
-//		USER_CONTAINER.insertAdjacentHTML('afterbegin', userCard);
-//		$('#count-of-users').text(parseInt($('#count-of-users').text()) + 1);
 	};
 
 	

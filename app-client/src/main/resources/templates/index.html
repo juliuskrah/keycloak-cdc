@@ -13,6 +13,7 @@
     <link rel="stylesheet" th:href="@{/css/vendor/animate.css}">
     <link rel="stylesheet" th:href="@{/css/vendor/magnific-popup.css}">
     <link rel="stylesheet" th:href="@{/css/vendor/main.css}">    
+    <link rel="stylesheet" th:href="@{/css/custom/index.css}">    
     <link rel="stylesheet" th:href="@{/css/vendor/responsive.css}">
     <link rel="stylesheet" th:href="@{/fonts/fontawesome-free-5.5.0/css/all.min.css}">
 
@@ -25,7 +26,7 @@
       <div class="overlay"></div>
       <nav class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar">
         <div class="container">
-          <a th:href="@{/}" class="navbar-brand"><h3><i class="fas fa-home"></i></h3></a>  
+          <a th:href="@{/}" class="navbar-brand"><h3><i class="fas fa-home text-dark"></i></h3></a>  
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="lni-menu"></i>
           </button>
@@ -84,9 +85,6 @@
     <!-- End Preloader -->
 
 	<script type="text/javascript">
-		//GET PAGE CONTEXT PATH
-	    const CONTEXT = [[@{/}]];
-		
 		//GET URL FOR STREAMING KAFKA CHANGES
 		const STREAM_EVENTS_URL = `[[${EVENTS_URL}]]`;
 	</script>

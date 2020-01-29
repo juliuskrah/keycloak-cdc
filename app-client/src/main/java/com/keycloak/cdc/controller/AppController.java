@@ -14,6 +14,6 @@ public class AppController {
 	@GetMapping({"/","/cdc"})
 	public String getApplicationPage(Model model) {
 		model.addAttribute("EVENTS_URL", eventsStreamingUrl);
-		return "index.html";		
+		return "index";		
 	}
 }
