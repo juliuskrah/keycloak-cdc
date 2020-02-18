@@ -1,7 +1,7 @@
 version: '3.7'
 
 services: 
- app-service:
+  app-service:
     image: juliuskrah/cdcapp:1.0
     container_name: cdc-service
     build: 
@@ -12,14 +12,14 @@ services:
     - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
     ports:
     - '8082:8082'
-app-client:
+  app-client:
     image: louisga/cdc-client:1.0
     container_name: cdc-client
     build: 
       context: ./app-client
       dockerfile: src/main/docker/Dockerfile
     ports:
-    - '8000:8081'
+    - '8081:8081'
     depends_on:
     - app-service
   postgres:

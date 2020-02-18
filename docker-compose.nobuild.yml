@@ -4,25 +4,25 @@ services:
   app-service:
     image: juliuskrah/cdcapp:1.0
     container_name: cdc-service
-    container_name: cdc-app
     depends_on: 
     - postgres
     environment: 
     - POSTGRES_REACTIVE_CLIENT_HOST=postgres
     - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
-    - MICRONAUT_SERVER_CORS_ENABLED='true'
+    - MICRONAUT_SERVER_CORS_ENABLED=true
     ports:
     - '8082:8082'
   app-client:
     image: louisga/cdc-client:1.0
     container_name: cdc-client
-    ports:
-    - '8000:8081'
     depends_on:
     - app-service
     environment:
     - USERS_URL=http://app-service:8082/api/users
     - EVENTS_STREAMING_URL=http://localhost:8082/api/users/stream
+    - SERVER_SERVLET_CONTEXT_PATH=/
+    ports:
+    - '8081:8081'
   postgres:
     image: juliuskrah/postgres:12-alpine-cdc
     container_name: cdc-postgres

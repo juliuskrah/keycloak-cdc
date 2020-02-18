@@ -11,9 +11,15 @@ public class AppController {
 	@Value("${events.streaming.url}")
 	String eventsStreamingUrl;
 	
-	@GetMapping({"/","/cdc"})
+	@GetMapping("/cdc")
 	public String getApplicationPage(Model model) {
 		model.addAttribute("EVENTS_URL", eventsStreamingUrl);
 		return "index";		
+	}
+
+	@GetMapping({"/"})
+	public String welcome(Model model) {
+		model.addAttribute("EVENTS_URL", eventsStreamingUrl);
+		return "redirect:/cdc";		
 	}
 }
