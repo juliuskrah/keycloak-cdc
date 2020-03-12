@@ -84,9 +84,11 @@
     </div>
     <!-- End Preloader -->
 
-	<script type="text/javascript">
+	<script th:inline="javascript">
+		//APPLICATION CONTEXT
+		const CONTEXT = [[@{/}]];
 		//GET URL FOR STREAMING KAFKA CHANGES
-		const STREAM_EVENTS_URL = `[[${EVENTS_URL}]]`;
+		const STREAM_EVENTS_URL = [[${EVENTS_URL}]];
 	</script>
 	
     <script th:src="@{/js/vendor/jquery-min.js}"></script>

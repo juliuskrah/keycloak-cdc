@@ -1,4 +1,4 @@
-import {DOMStrings, DOMClasses, DOMEvents, DOMIds} from './data.js';
+import {DOMStrings, DOMClasses, DOMEvents, DOMIds, DOMElements} from './data.js';
 
 (()=> {
 	
@@ -69,9 +69,9 @@ import {DOMStrings, DOMClasses, DOMEvents, DOMIds} from './data.js';
 				$(DOMIds.totalUsers).text(0);
 				
 				let noUserCard = `<no-user-card id="no-users-card">
-				<div><i class="fas fa-user-slash"></i></div>
-				<div><p>No Users</p></div>
-				</no-user-card>`;
+								  <div><i class="fas fa-user-slash"></i></div>
+								  <div><p>No Users</p></div>
+								  </no-user-card>`;
 				USER_CONTAINER.insertAdjacentHTML(DOMStrings.afterBeginOfContainer, noUserCard);
 				$.notify(DOMStrings.usersNotFound, DOMStrings.notifyInfo);
 			}
@@ -79,9 +79,9 @@ import {DOMStrings, DOMClasses, DOMEvents, DOMIds} from './data.js';
 		error:()=> {
 			$(DOMIds.totalUsers).text(0);
 			let noUserCard = `<no-user-card id="no-users-card">
-			<div><i class="fas fa-user-slash"></i></div>
-			<div><p>Error Loading Users.<br><br> Verify that the URL is valid</p></div>
-			</no-user-card>`;
+							  <div><i class="fas fa-user-slash"></i></div>
+							  <div><p>Error Loading Users.</p></div>
+							  </no-user-card>`;
 			USER_CONTAINER.insertAdjacentHTML(DOMStrings.afterBeginOfContainer, noUserCard);
 			$.notify(DOMStrings.errorLoadingUsers, DOMStrings.notifyError);
 		}		
@@ -89,9 +89,8 @@ import {DOMStrings, DOMClasses, DOMEvents, DOMIds} from './data.js';
 	
 	//ON SSE CONNECTION SUCCESS
 	EVENT_SOURCE.onmessage = e => {
-		const msg = e.data;
 		let date = moment(new Date()); 
-		console.log('MESSAGE -> ', msg)
+		const msg  = JSON.parse(e.data);
 		
 		switch(msg.type) {
 		
@@ -111,42 +110,38 @@ import {DOMStrings, DOMClasses, DOMEvents, DOMIds} from './data.js';
 			
 			case DOMEvents.UserDeletedEvent:					
 				if($('#'+ msg.source.id).length) {
-					$('#'+ msg.source.id).fadeOut().remove();
 					$.notify($('#'+ msg.source.id).find(DOMClasses.username).text() + DOMStrings.userDeleted, DOMStrings.notifySuccess);
+					$('#'+ msg.source.id).fadeOut().remove();
 				}	
 				else $.notify(DOMStrings.userNotFound, DOMStrings.notifyInfo);				
 			break;
 
 			case DOMEvents.UserRemovedFromRoleEvent:				
-				if($('#'+ msg.source.id).length) {
-					$('#'+ msg.source.id).find(DOMClasses.role).text(DOMStrings.notAvailable);
-					$.notify($('#'+ msg.source.id).find(DOMClasses.username).text() + DOMStrings.userRoleRemoved, DOMStrings.notifySuccess);
+				if($('#'+ msg.source.user_id).length) {
+					$('#'+ msg.source.user_id).find(DOMClasses.role).text(DOMStrings.notAvailable);
+					$.notify($('#'+ msg.source.user_id).find(DOMClasses.username).text() + DOMStrings.userRoleRemoved, DOMStrings.notifySuccess);
 				}
 				else $.notify(DOMStrings.userNotFound, DOMStrings.notifyInfo);				
 			break;
 
 			case DOMEvents.UserAddedToRoleEvent:
 				if($('#'+ msg.source.user_id).length) {
-					$('#'+ msg.source.user_id).find(DOMClasses.role).text(`This role has been updated`);
+					$('#'+ msg.source.user_id).find(DOMClasses.role).html(DOMElements.syncButton);
 					$.notify($('#'+ msg.source.user_id).find(DOMClasses.username).text() + DOMStrings.userRoleUpdated, DOMStrings.notifySuccess);
 				}
 				else $.notify(DOMStrings.userNotFound, DOMStrings.notifyInfo);	
 			break;
 
 			case DOMEvents.RoleAddedEvent:
-				$.notify(DOMStrings.roleAdded + msg.source.name, DOMStrings.notifySuccess);
+				$.notify(DOMStrings.roleAdded + msg.source.name.toUpperCase(), DOMStrings.notifySuccess);
 			break;
 
 			case DOMEvents.RoleUpdatedEvent:
-				$.notify(msg.source.name + DOMStrings.roleUpdated + msg.source.description, DOMStrings.notifySuccess);
+				$.notify(msg.source.name.toUpperCase() + DOMStrings.roleUpdated + msg.source.description, DOMStrings.notifySuccess);
 			break;
 
 			case DOMEvents.RoleDeletedEvent:
 				$.notify(DOMStrings.roleDeleted, DOMStrings.notifySuccess);
-			break;
-			
-			default:
-				$.notify(DOMStrings.newEvent, DOMStrings.notifyInfo);
 			break;
 		}
 	};
@@ -154,11 +149,8 @@ import {DOMStrings, DOMClasses, DOMEvents, DOMIds} from './data.js';
 	
 	//ON SSE CONNECTION ERROR
 	EVENT_SOURCE.onerror = e => {
-		if (e.readyState == EventSource.CLOSED)
-			$.notify(DOMStrings.connectionClosed, DOMStrings.notifyError, {position: 'center'});
-		else
-			$.notify(`${DOMStrings.connectionError} \n ${STREAM_EVENTS_URL}`, DOMStrings.notifyError, {globalPosition: 'top center'});
-		console.log(e)
+		if (e.readyState == EventSource.CLOSED) $.notify(DOMStrings.connectionClosed, DOMStrings.notifyError, {position: 'center'});
+		else $.notify(`${DOMStrings.connectionError} \n ${STREAM_EVENTS_URL}`, DOMStrings.notifyError, {globalPosition: 'top center'});
 	};
 
 })();
