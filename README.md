@@ -50,6 +50,8 @@ Password: test
 
 # Introduction
 
+![Preview](./dbz2.gif)
+
 This repository contains a sample project on how to stream in real-time, users created in Keycloak to your
 application.
 
