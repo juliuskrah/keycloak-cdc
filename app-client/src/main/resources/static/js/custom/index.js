@@ -91,7 +91,7 @@ import {DOMStrings, DOMClasses, DOMEvents, DOMIds, DOMElements} from './data.js'
 	EVENT_SOURCE.onmessage = e => {
 		let date = moment(new Date()); 
 		const msg  = JSON.parse(e.data);
-		console.log(msg)
+		
 		switch(msg.type) {
 		
 			case DOMEvents.UserUpdatedEvent:
