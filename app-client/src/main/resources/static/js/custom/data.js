@@ -43,4 +43,8 @@ let DOMIds = {
 	noUsersCard: `#no-users-card`
 }
 
-export {DOMStrings, DOMClasses, DOMEvents, DOMIds};
+let DOMElements = {
+	syncButton: `<i class="fas fa-sync-alt cursor-pointer" title="This user's role has been updated. Click to Sync" onclick="location.reload(true);"></i>`
+}
+
+export {DOMStrings, DOMClasses, DOMEvents, DOMIds, DOMElements};

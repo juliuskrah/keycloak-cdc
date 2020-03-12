@@ -1,4 +1,6 @@
-
+.cursor-pointer {
+	cursor: pointer;
+}
 /* ==========================================================================
  User Section
    ========================================================================== */
@@ -39,6 +41,7 @@ user-card .user-card--right .user-card--right-info-main {
 user-card .user-card--right .user-card--right-info-main h3 {
   color: #3c9cfd;
   font-weight: 700;
+  text-transform: capitalize;
   font-family: 'Poppins', sans-serif;
 }
 
