@@ -58,7 +58,7 @@ services:
     - zk-trx-logs:/var/lib/zookeeper/log
   kafka:
     image: confluentinc/cp-kafka:5.3.2
-    container_name: cdc-kraken
+    container_name: cdc-kafka
     depends_on: 
     - zookeeper
     environment:
